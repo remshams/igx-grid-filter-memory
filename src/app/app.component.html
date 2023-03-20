@@ -1,13 +1,5 @@
-<igx-grid [data]="initialData" [autoGenerate]="false" [allowFiltering]="true">
-  <igx-column [field]="'key'" [resizable]="true">
-    <ng-template igxCell let-value>
-      {{ value }}
-    </ng-template>
-  </igx-column>
-  <igx-column [field]="'value'">
-    <ng-template igxCell let-value>
-      {{ value | async | date : "medium" }}
-    </ng-template>
-  </igx-column>
+<igx-grid [data]="data$ | async" [autoGenerate]="false" [allowFiltering]="true">
+  <igx-column [field]="'key'" [resizable]="true"> </igx-column>
+  <igx-column [field]="'value'"> </igx-column>
 </igx-grid>
 App running for {{ appRunningFor$ | async | date : "mm:ss" }}

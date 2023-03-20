@@ -8,17 +8,23 @@ import { interval, map, scan } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'igx-grid-memory';
   private startTime = new Date();
 
-  initialData = [
-    { key: '1', value: interval(1000).pipe(map(() => new Date())) },
-    { key: '2', value: interval(1000).pipe(map(() => new Date())) },
-    { key: '3', value: interval(1000).pipe(map(() => new Date())) },
-    { key: '4', value: interval(1000).pipe(map(() => new Date())) },
+  private initialData = [
+    { key: '1', value: new Date() },
+    { key: '2', value: new Date() },
+    { key: '3', value: new Date() },
+    { key: '4', value: new Date() },
   ];
 
   appRunningFor$ = interval(1000).pipe(
     map(() => new Date().getTime() - this.startTime.getTime())
+  );
+
+  data$ = interval(1000).pipe(
+    scan((data) => {
+      data.forEach((row) => (row.value = new Date()));
+      return [...data];
+    }, this.initialData)
   );
 }
